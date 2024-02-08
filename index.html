@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diacritic Converter</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            width: 100vw;
+            height: 95vh;
+            max-height: 95vh;
+            max-width: 100vw;
+            overflow: hidden;
+
+            justify-content: space-between;
+
+        }
+        .input, .output {
+            resize: none;
+            width: 48vw;
+            font-size: 1.5vw;
+            padding: 1.5vw;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .output {
+            user-select: all;
+        }
+
+        @media (max-width: 750px) {
+            body {
+                flex-direction: column;
+            }
+            .input, .output {
+                height: 48vh;
+                width: 92vw;
+                font-size: 5vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <textarea name="input" id="input" class="input" placeholder="Paste text from Vedabase here..."></textarea>
+    <textarea name="output" id="output" class="output" placeholder="See the unicode text here..." readonly></textarea>
+</body>
+<script>
+
+    const diacon = (text)=>{
+        var diamap = {
+            "ä":"ā", "é":"ī", "ü":"ū", "å":"ṛ", "à":"ṁ", "ù":"ḥ", "ï":"ñ", "ì":"ṅ", "ö":"ṭ", "ò":"ḍ", "ë":"ṇ", "ç":"ś", "ñ":"ṣ", "Ä":"Ā", "É":"Ī", "Ü":"Ū", "Å":"Ṛ", "À":"Ṁ", "Ù":"Ḥ", "Ï":"Ñ", "Ì":"Ṅ", "Ö":"Ṭ", "Ò":"Ḍ", "Ë":"Ṇ", "Ç":"Ś", "Ñ":"Ṣ"
+        }
+    
+        Object.keys(diamap).forEach(k=>{
+            text = text.replaceAll(k, diamap[k])
+        })
+
+        return text
+
+    }
+    
+    document.getElementById("input").addEventListener('input', (event)=>{
+        document.getElementById("output").value = diacon(event.target.value)
+    })
+</script>
+</html>
